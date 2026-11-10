@@ -325,6 +325,12 @@ h2 {
 	gap: 22px;
 }
 
+.content-stack {
+	display: grid;
+	gap: 22px;
+	margin-top: 24px;
+}
+
 .content-card {
 	padding: clamp(22px, 3vw, 32px);
 	border: 1px solid var(--line);
@@ -413,6 +419,49 @@ h2 {
 
 .side-card h2 {
 	font-size: 24px;
+}
+
+.regulation-card {
+	margin-top: 0;
+}
+
+.evaluation-card {
+	margin-top: 0;
+}
+
+.home-next {
+	margin-top: 0;
+}
+
+.regulation-list {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0 32px;
+	margin: 22px 0 0;
+	padding: 0;
+	list-style: none;
+	counter-reset: regulation;
+}
+
+.regulation-list li {
+	position: relative;
+	min-height: 43px;
+	padding: 10px 8px 10px 36px;
+	border-top: 1px solid var(--line);
+	color: #5c4c42;
+	font-size: 13px;
+	line-height: 1.5;
+	counter-increment: regulation;
+}
+
+.regulation-list li::before {
+	position: absolute;
+	top: 9px;
+	left: 2px;
+	color: var(--terracotta);
+	font-family: 'Playfair Display', Georgia, serif;
+	font-size: 14px;
+	content: counter(regulation, decimal-leading-zero);
 }
 
 .clean-list {
@@ -768,6 +817,10 @@ h2 {
 	}
 
 	.side-column {
+		grid-template-columns: 1fr;
+	}
+
+	.regulation-list {
 		grid-template-columns: 1fr;
 	}
 
