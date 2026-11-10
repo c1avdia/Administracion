@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#102a43">
+	<title>Administración | Inicio</title>
+	<style>
+		:root {
+			--navy: #102a43;
+			--blue: #176b87;
+			--teal: #35b3a0;
+			--ink: #243b53;
+			--muted: #627d98;
+			--paper: #ffffff;
+			--background: #f3f7fa;
+			--line: #d9e2ec;
+		}
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+		body {
+			margin: 0;
+			color: var(--ink);
+			background: var(--background);
+			font: 16px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+		}
+		a { color: inherit; }
+		.site-header {
+			position: sticky;
+			top: 0;
+			z-index: 10;
+			color: white;
+			background: var(--navy);
+			box-shadow: 0 3px 14px #102a4330;
+		}
+		.header-inner {
+			max-width: 1180px;
+			min-height: 72px;
+			margin: auto;
+			padding: 12px 24px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+		}
+		.brand { margin: 0; font-size: 1.15rem; letter-spacing: .04em; white-space: nowrap; }
+		.brand span { color: #73dfcf; }
+		nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 5px; }
+		nav a {
+			padding: 7px 10px;
+			border-radius: 6px;
+			color: #e6f1f5;
+			font-size: .88rem;
+			text-decoration: none;
+			transition: background .2s ease;
+		}
+		nav a:hover, nav a:focus-visible { background: #ffffff20; outline: none; }
+		main { max-width: 1050px; margin: 34px auto 70px; padding: 0 22px; }
+		section {
+			margin: 22px 0;
+			padding: clamp(24px, 5vw, 46px);
+			border: 1px solid var(--line);
+			border-radius: 16px;
+			background: var(--paper);
+			box-shadow: 0 8px 26px #102a4309;
+		}
+		h2 { margin: 0 0 12px; color: var(--navy); font-size: clamp(1.45rem, 3vw, 2rem); line-height: 1.25; }
+		.eyebrow { margin: 0 0 7px; color: var(--blue); font-size: .76rem; font-weight: 750; letter-spacing: .13em; text-transform: uppercase; }
+		.cover {
+			min-height: 430px;
+			display: grid;
+			grid-template-columns: 1.15fr .85fr;
+			align-items: center;
+			gap: 34px;
+			overflow: hidden;
+			color: white;
+			border: 0;
+			background: linear-gradient(125deg, #102a43, #176b87 75%, #229b98);
+		}
+		.cover h2 { margin-bottom: 14px; color: white; font-size: clamp(2.6rem, 7vw, 5rem); letter-spacing: -.05em; }
+		.cover .eyebrow { color: #8de6d7; }
+		.cover-copy > p:not(.eyebrow) { max-width: 500px; color: #e2f2f4; font-size: 1.05rem; }
+		.details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 26px; }
+		.detail { padding: 12px 14px; border: 1px solid #ffffff3b; border-radius: 9px; background: #ffffff0c; }
+		.detail strong { display: block; color: #8de6d7; font-size: .75rem; letter-spacing: .07em; text-transform: uppercase; }
+		.detail span { color: #fff; }
+		.cover-art { width: 100%; max-height: 310px; filter: drop-shadow(0 18px 22px #071b2a55); }
+		.section-note { margin: 0; color: var(--muted); }
+		.reader-frame {
+			width: 100%;
+			height: min(72vh, 760px);
+			min-height: 430px;
+			margin-top: 20px;
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			background: #edf2f7;
+		}
+		.placeholder {
+			padding: 18px 20px;
+			border-left: 4px solid var(--teal);
+			border-radius: 5px;
+			background: #f2fbf9;
+		}
+		.placeholder p { margin: 0; }
+		.placeholder + .placeholder { margin-top: 12px; }
+		.unit-section { scroll-margin-top: 90px; }
+		.unit-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 22px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: #f7fafc; }
+		.unit-nav a { padding: 7px 12px; border-radius: 7px; color: var(--blue); background: white; border: 1px solid var(--line); font-size: .9rem; font-weight: 650; text-decoration: none; }
+		.unit-nav a:hover, .unit-nav a:focus-visible { color: white; background: var(--blue); outline: none; }
+		.resource-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+		.resource-card { min-height: 120px; padding: 18px; border: 1px dashed #9fb3c8; border-radius: 10px; background: #fbfdff; }
+		.resource-card h3 { margin: 0 0 6px; color: var(--navy); font-size: 1rem; }
+		.resource-card p { margin: 0; color: var(--muted); font-size: .92rem; }
+		footer { padding: 22px; color: var(--muted); text-align: center; font-size: .9rem; }
+		@media (max-width: 760px) {
+			.header-inner { align-items: flex-start; flex-direction: column; }
+			nav { justify-content: flex-start; }
+			.cover { grid-template-columns: 1fr; }
+			.cover-art { max-height: 220px; }
+		}
+		@media (max-width: 460px) {
+			.header-inner { padding: 12px 16px; }
+			nav a { padding: 6px 8px; font-size: .82rem; }
+			main { margin-top: 20px; padding: 0 13px; }
+			.details { grid-template-columns: 1fr; }
+			.reader-frame { min-height: 350px; }
+			.resource-list { grid-template-columns: 1fr; }
+		}
+	</style>
+</head>
+<body>
+	<header class="site-header">
+		<div class="header-inner">
+			<h1 class="brand">Materia: <span>Administración</span></h1>
+			<nav aria-label="Menú principal">
+				<a href="#portada">Portada</a>
+				<a href="#unidad-1">Unidad 1</a>
+				<a href="#unidad-2">Unidad 2</a>
+				<a href="#unidad-3">Unidad 3</a>
+				<a href="#unidad-4">Unidad 4</a>
+				<a href="#conclusion">Conclusión</a>
+				<a href="#fuentes">Fuentes</a>
+			</nav>
+		</div>
+	</header>
+
+	<main>
+		<section class="cover" id="portada" aria-labelledby="cover-title">
+			<div class="cover-copy">
+				<p class="eyebrow">Material de la materia</p>
+				<h2 id="cover-title">Administración</h2>
+				<p>Conceptos, herramientas y recursos para comprender la gestión de las organizaciones.</p>
+				<div class="details">
+					<div class="detail"><strong>Escuela</strong><span>Nombre de la escuela</span></div>
+					<div class="detail"><strong>Docente</strong><span>Nombre del docente</span></div>
+					<div class="detail"><strong>Estudiante</strong><span>Nombre del estudiante</span></div>
+					<div class="detail"><strong>Periodo escolar</strong><span>Periodo escolar</span></div>
+				</div>
+			</div>
+			<svg class="cover-art" viewBox="0 0 420 300" role="img" aria-label="Ilustración de gráficas y crecimiento empresarial">
+				<circle cx="214" cy="150" r="121" fill="#ffffff" opacity=".1"/>
+				<rect x="77" y="72" width="270" height="174" rx="17" fill="#f7fbfc"/>
+				<rect x="97" y="91" width="127" height="12" rx="6" fill="#d5e8eb"/>
+				<rect x="97" y="111" width="85" height="8" rx="4" fill="#e2edf0"/>
+				<path d="M111 204l48-42 34 19 43-56 39 22 43-48" fill="none" stroke="#22a894" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+				<path d="M304 99h14v14" fill="none" stroke="#22a894" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+				<circle cx="159" cy="162" r="7" fill="#176b87"/><circle cx="193" cy="181" r="7" fill="#176b87"/><circle cx="236" cy="125" r="7" fill="#176b87"/><circle cx="275" cy="147" r="7" fill="#176b87"/>
+				<rect x="103" y="222" width="26" height="9" rx="4" fill="#d5e8eb"/><rect x="139" y="222" width="49" height="9" rx="4" fill="#d5e8eb"/>
+			</svg>
+		</section>
+
+		<section id="introduccion" aria-labelledby="intro-title">
+			<p class="eyebrow">Bienvenida</p>
+			<h2 id="intro-title">Introducción</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae sem at justo facilisis consequat. Integer dignissim, sapien sed volutpat consequat, erat nisl placerat neque, vitae posuere magna lorem a justo. Curabitur a lectus ut arcu tincidunt feugiat. Sed euismod, erat vel suscipit cursus, neque velit commodo purus, vitae blandit mi ipsum quis neque.</p>
+		</section>
+
+		<section id="temario" aria-labelledby="temario-title">
+			<p class="eyebrow">Documento de consulta</p>
+			<h2 id="temario-title">Temario</h2>
+			<p class="section-note">Agrega tu archivo PDF a la carpeta del sitio y cambia <strong>temario.pdf</strong> por el nombre del archivo si es diferente.</p>
+			<iframe class="reader-frame" src="temario.pdf" title="Lector del temario en PDF">
+				Tu navegador no puede mostrar el PDF. <a href="temario.pdf">Abrir o descargar el temario</a>.
+			</iframe>
+		</section>
+
+		<section id="competencia" aria-labelledby="competencia-title">
+			<p class="eyebrow">Propósito formativo</p>
+			<h2 id="competencia-title">Competencia de la Materia</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non risus sed justo luctus interdum. Praesent vitae lectus eu nulla posuere gravida. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; quisque at sapien vel mauris porttitor efficitur.</p>
+		</section>
+
+		<section id="reglamento" aria-labelledby="reglamento-title">
+			<p class="eyebrow">Convivencia y participación</p>
+			<h2 id="reglamento-title">Reglamento interior de clases</h2>
+			<div class="placeholder"><p><strong>Asistencia y puntualidad.</strong> Presentarse a clase puntualmente y seguir los lineamientos establecidos por la institución.</p></div>
+			<div class="placeholder"><p><strong>Respeto y colaboración.</strong> Mantener un trato respetuoso, escuchar las participaciones y colaborar de forma constructiva.</p></div>
+			<div class="placeholder"><p><strong>Responsabilidad académica.</strong> Entregar las actividades en las fechas indicadas y citar las fuentes consultadas.</p></div>
+			<div class="placeholder"><p><strong>Uso de dispositivos.</strong> Utilizar dispositivos y materiales de clase únicamente para las actividades de aprendizaje.</p></div>
+		</section>
+
+		<section id="evaluacion" aria-labelledby="evaluacion-title">
+			<p class="eyebrow">Seguimiento del aprendizaje</p>
+			<h2 id="evaluacion-title">Criterios de evaluación</h2>
+			<div class="placeholder"><p><strong>Actividades y tareas:</strong> cumplimiento, claridad y entrega oportuna.</p></div>
+			<div class="placeholder"><p><strong>Proyectos y trabajos:</strong> aplicación de conceptos, investigación y presentación.</p></div>
+			<div class="placeholder"><p><strong>Participación:</strong> aportaciones, colaboración y disposición para el trabajo en clase.</p></div>
+			<p class="section-note" style="margin-top:14px">Los porcentajes y fechas pueden ser ajustados por el docente.</p>
+		</section>
+
+		<section class="unit-section" id="unidad-1" aria-labelledby="unidad-1-title">
+			<p class="eyebrow">Contenido del curso</p><h2 id="unidad-1-title">Unidad 1</h2>
+			<p class="section-note">Usa este menú para navegar entre los espacios de trabajo de la unidad. Puedes insertar archivos PDF o presentaciones PPTX.</p>
+			<nav class="unit-nav" aria-label="Archivos de la Unidad 1"><a href="#u1-archivo-1">Archivo 1</a><a href="#u1-archivo-2">Archivo 2</a><a href="#u1-archivo-3">Archivo 3</a><a href="#u1-archivo-4">Archivo 4</a></nav>
+			<div class="resource-list"><article class="resource-card" id="u1-archivo-1"><h3>Archivo 1</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article><article class="resource-card" id="u1-archivo-2"><h3>Archivo 2</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article><article class="resource-card" id="u1-archivo-3"><h3>Archivo 3</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article><article class="resource-card" id="u1-archivo-4"><h3>Archivo 4</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article></div>
+		</section>
+		<section class="unit-section" id="unidad-2" aria-labelledby="unidad-2-title">
+			<p class="eyebrow">Contenido del curso</p><h2 id="unidad-2-title">Unidad 2</h2>
+			<p class="section-note">Usa este menú para navegar entre los espacios de trabajo de la unidad. Puedes insertar archivos PDF o presentaciones PPTX.</p>
+			<nav class="unit-nav" aria-label="Archivos de la Unidad 2"><a href="#u2-archivo-1">Archivo 1</a><a href="#u2-archivo-2">Archivo 2</a><a href="#u2-archivo-3">Archivo 3</a><a href="#u2-archivo-4">Archivo 4</a></nav>
+			<div class="resource-list"><article class="resource-card" id="u2-archivo-1"><h3>Archivo 1</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article><article class="resource-card" id="u2-archivo-2"><h3>Archivo 2</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article><article class="resource-card" id="u2-archivo-3"><h3>Archivo 3</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article><article class="resource-card" id="u2-archivo-4"><h3>Archivo 4</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article></div>
+		</section>
+		<section class="unit-section" id="unidad-3" aria-labelledby="unidad-3-title">
+			<p class="eyebrow">Contenido del curso</p><h2 id="unidad-3-title">Unidad 3</h2>
+			<p class="section-note">Usa este menú para navegar entre los espacios de trabajo de la unidad. Puedes insertar archivos PDF o presentaciones PPTX.</p>
+			<nav class="unit-nav" aria-label="Archivos de la Unidad 3"><a href="#u3-archivo-1">Archivo 1</a><a href="#u3-archivo-2">Archivo 2</a><a href="#u3-archivo-3">Archivo 3</a><a href="#u3-archivo-4">Archivo 4</a></nav>
+			<div class="resource-list"><article class="resource-card" id="u3-archivo-1"><h3>Archivo 1</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article><article class="resource-card" id="u3-archivo-2"><h3>Archivo 2</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article><article class="resource-card" id="u3-archivo-3"><h3>Archivo 3</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article><article class="resource-card" id="u3-archivo-4"><h3>Archivo 4</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article></div>
+		</section>
+		<section class="unit-section" id="unidad-4" aria-labelledby="unidad-4-title">
+			<p class="eyebrow">Contenido del curso</p><h2 id="unidad-4-title">Unidad 4</h2>
+			<p class="section-note">Usa este menú para navegar entre los espacios de trabajo de la unidad. Puedes insertar archivos PDF o presentaciones PPTX.</p>
+			<nav class="unit-nav" aria-label="Archivos de la Unidad 4"><a href="#u4-archivo-1">Archivo 1</a><a href="#u4-archivo-2">Archivo 2</a><a href="#u4-archivo-3">Archivo 3</a><a href="#u4-archivo-4">Archivo 4</a></nav>
+			<div class="resource-list"><article class="resource-card" id="u4-archivo-1"><h3>Archivo 1</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article><article class="resource-card" id="u4-archivo-2"><h3>Archivo 2</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article><article class="resource-card" id="u4-archivo-3"><h3>Archivo 3</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article><article class="resource-card" id="u4-archivo-4"><h3>Archivo 4</h3><p>Agrega aquí el nombre y el enlace o lector de tu PDF o PPTX.</p></article></div>
+		</section>
+		<section id="conclusion"><p class="eyebrow">Cierre</p><h2>Conclusión</h2><p class="section-note">Agrega aquí la conclusión de la materia.</p></section>
+		<section id="fuentes"><p class="eyebrow">Referencias</p><h2>Fuentes</h2><p class="section-note">Agrega aquí los libros, sitios web y demás fuentes consultadas.</p></section>
+	</main>
+	<footer>Administración · Material académico</footer>
+</body>
+</html>
